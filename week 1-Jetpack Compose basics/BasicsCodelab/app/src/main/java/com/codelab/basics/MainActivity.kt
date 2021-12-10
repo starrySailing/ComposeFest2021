@@ -1,19 +1,3 @@
-/*
- * Copyright 2021 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.codelab.basics
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -98,14 +82,51 @@ private fun OnboardingScreen(onContinueClicked: () -> Unit) {
 @Composable
 private fun Greetings(names: List<String> = List(1000) { "$it" } ) {
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
+        // A surface container using the 'background' color from the theme
+        /*Surface(color = MaterialTheme.colors.background) {
+            Greeting("Android")
+        }*/
         items(items = names) { name ->
-            Greeting(name = name)
+            Greeting(name = "$name!")
         }
     }
 }
 
 @Composable
 private fun Greeting(name: String) {
+    /*var expanded by remember { mutableStateOf(false) }
+    val extraPadding by animateDpAsState(
+        if (expanded) 48.dp else 0.dp,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow
+        )
+    )
+
+    Surface(
+        color = MaterialTheme.colors.primary,
+        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+    ) {
+        Row(modifier = Modifier.padding(24.dp)) {
+            Column(modifier = Modifier
+                .weight(1f)
+                .padding(bottom = extraPadding.coerceAtLeast(0.dp))
+            ) {
+                Text(text = "Hello, ")
+                Text(
+                    text = "$name!",
+                    style = MaterialTheme.typography.h4.copy(
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                )
+            }
+            OutlinedButton(
+                onClick = { expanded = !expanded },
+            ) {
+                Text(if (expanded) "Show less" else "Show more")
+            }
+        }
+    }*/
     Card(
         backgroundColor = MaterialTheme.colors.primary,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
@@ -167,7 +188,7 @@ private fun CardContent(name: String) {
     uiMode = UI_MODE_NIGHT_YES,
     name = "DefaultPreviewDark"
 )
-@Preview(showBackground = true, widthDp = 320)
+@Preview(showBackground = true, widthDp = 320, name = "Text preview")
 @Composable
 fun DefaultPreview() {
     BasicsCodelabTheme {
